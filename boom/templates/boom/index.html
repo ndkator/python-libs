@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body style="background-image:url({% static "images/indexback.png" %}">
+
+{% if user.is_active %}
+    <p>&nbsp;</p>
+    <h1 style="text-align: center;">Добро пожаловать, {{user.username}}!</h1>
+	{% if user.username == 'pavel' %}
+		<p style="text-align: center;"><a href="/admin"><span style="background-color: #ff0000; color: #ffffff; display: inline-block; padding: 3px 100px; font-weight: bold; border-radius: 5px;">Панель администратора</span></a></p>
+        <p style="text-align: center;"><a href="/admin/dashboard/mydash/"><span style="background-color: #fbcd35; color: #ffffff; display: inline-block; padding: 3px 100px; font-weight: bold; border-radius: 5px;">Диаграммы</span></a></p>
+
+
+	{% endif %}
+ {% else %}
+<p>&nbsp;</p>
+<h1 style="text-align: center;">Добро пожаловать!</h1>
+ {% endif %}
+{% if user.is_anonymous %}
+<p style="text-align: center;"><a href="/about"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+padding: 3px 10px; font-weight: bold; border-radius: 5px;">О сайте</span></a> |
+    <a href="/accounts/signup/"><span style="background-color: #35ff2e; color: #ffffff; display: inline-block;
+    padding: 3px 10px; font-weight: bold; border-radius: 5px;">Регистрация</span></a> |
+    <a href="/accounts/login/"><span style="background-color: #0000ff; color: #ffffff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">Авторизация</span></a></p>
+{% endif %}
+
+{% if user.is_active %}
+<p style="text-align: center;"><a href="/about"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+padding: 3px 10px; font-weight: bold; border-radius: 5px;">О сайте</span></a> |
+    <a href="/accounts/logout"><span style="background-color: #35ff2e; color: #ffffff; display: inline-block;
+    padding: 3px 10px; font-weight: bold; border-radius: 5px;">Выйти из аккаунта</span></a></p>
+
+{% endif %}
+
+<p style="text-align: center;"><img src="{% static "images/snake.jpg" %}" alt="Stones along the river" ></p>
+
+<!-- Общий поиск -->
+<form class="testclass" style="text-align: center;" method="GET" action="{% url "search_true" %}">
+    <div class="form-group">
+        <input type="text" class="classsearch" placeholder="Введите ключевые слова" name="q">
+        <!-- Работа с SELECT -->
+        <div class="form-group">
+            Искать в:
+            <select name="par1">
+                <option value="Library">Библиотеках</option>
+                <option value="Module">Модулях</option>
+                <option value="Task">Задачах</option>
+                <option value="Creator">Создателях</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            Искать по:
+            <select name="par2">
+                <option value="Name">Названиям</option>
+                <option value="Desc">Описаниям</option>
+                <option value="NameAndDesc">Названиям и описаниям</option>
+                <option value="All">Всем параметрам</option>
+                <option value ="Country">Странам</option>
+            </select>
+        </div>
+
+        <!-- Передача GET -->
+        <button class="search" type="submit">Поиск</button></div>
+</form>
+
+<p style="text-align: center;"><a href="/tasks"><span style="background-color: #35ff2e; color: #ffffff; display: inline-block;
+padding: 3px 10px; font-weight: bold; border-radius: 5px;">Задачи</span></a> |
+    <a href="/libs"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+    padding: 3px 10px; font-weight: bold; border-radius: 5px;">Библиотеки</span></a> |
+    <a href="/modules"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+    padding: 3px 10px; font-weight: bold; border-radius: 5px;">Модули</span></a> |
+    <a href="/creators"><span style="background-color: #35ff2e; color: #ffffff; display: inline-block;
+    padding: 3px 10px; font-weight: bold; border-radius: 5px;">Создатели</span></a></p>
+</body>
+</html>

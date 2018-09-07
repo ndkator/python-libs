@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница вывода всех имеющихся создателей + поиск + сортировка + пагинация [/creators/___/creators/search/] -->
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body style="background-image:url({% static "images/creatorback.png" %}">
+<p>&nbsp;</p>
+<p style="text-align: center;"><img src="{% static "images/snake.jpg" %}" alt="Stones along the river" ></p>
+
+<!-- Общий поиск -->
+<form class="testclass" style="text-align: center;" method="GET" action="{% url "Creator_search_path" %}">
+    <div class="form-group">
+        <input type="text" class="classsearch" placeholder="Введите ключевые слова" name="q">
+        <!-- Работа с SELECT -->
+        <div class="form-group">
+            Искать по:
+            <select name="par1">
+                <option value="All">Всем параметрам</option>
+                <option value="Names">Именам</option>
+                <option value="Country">Странам</option>
+                <option value="Site">Сайтам</option>
+            </select>
+        </div>
+        <button type="submit" class="search">Поиск</button></div>
+</form>
+
+<!-- Сортировка -->
+<p style="text-align: center;"><a href="/creators/filter/name"><button class="exit">Отсортировать по имени</button></a> |
+    <a href="/creators/filter/country"><button class="exit">Отсортировать по странам</button></a></p>
+
+{% block content %}
+
+<!-- Вывод заголовков библиотек из БД + Разделение на строки и столбцы-->
+<table style="margin-left: auto; margin-right: auto;"><tr>
+{% for create in object_list %}
+   <td><a href="/creators/{{create.id}}"><h3 style="text-align: center;">{{create.Name}}</h3></a></td>
+   {% if forloop.last %}
+     </tr>
+   {% else %}
+     {% if forloop.counter|divisibleby:"1" %} <!-- Количество заголовков в столбце -->
+       </tr><tr>
+     {% endif %}
+   {% endif %}
+{% endfor %}
+</table>
+
+<!-- Пагинация -->
+<div style="text-align: center;">
+{% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/creators/filter/reversename/?page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+                <span class="page-current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/creators/filter/reversename/?page={{ page_obj.next_page_number }}">Вперёд</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% endblock %}
+</div>
+</body>
+
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница, открывающаяся при использовании фильтра "Отсортировать по имени" -->
+<!-- Работает точно так же, как и moduleout.html -->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body style="background-image:url({% static "images/moduleback.png" %}">
+<p>&nbsp;</p>
+<p style="text-align: center;"><img src="{% static "images/snake.jpg" %}" alt="Stones along the river" ></p>
+
+<!-- Общий поиск -->
+<form class="testclass" style="text-align: center;" method="GET" action="{% url "Module_search_path" %}">
+    <div class="form-group">
+        <input type="text" class="classsearch" placeholder="Введите ключевые слова" name="q">
+        <div class="form-group">
+            Искать по:
+            <select name="par1">
+                <option value="NamesAndDesc">Названиям и описаниям</option>
+                <option value="Names">Названиям</option>
+                <option value="Desc">Описаниям</option>
+                <option value="Libs">Библиотекам</option>
+                <option value="Tasks">Задачам</option>
+            </select>
+        </div>
+        <button type="submit" class="search">Поиск</button></div>
+</form>
+
+
+<p style="text-align: center;"><a href="/modules/filter/name"><button class="exit">Отсортировать по имени</button></a> |
+    <a href="/modules/filter/libsid"><button class="exit">Отсортировать по библиотекам</button></a></p>
+
+{% block content %}
+
+<table style="margin-left: auto; margin-right: auto;"><tr>
+{% for modules in object_list %}
+   <td><a href="/modules/{{modules.id}}"><h3 style="text-align: center;">{{modules.Name}}</h3></a></td>
+   {% if forloop.last %}
+     </tr>
+   {% else %}
+     {% if forloop.counter|divisibleby:"1" %}
+       </tr><tr>
+     {% endif %}
+   {% endif %}
+{% endfor %}
+</table>
+
+<div style="text-align: center;">
+{% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/modules/filter/reverselibsid/?page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+                <span class="page-current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/modules/filter/reverselibsid/?page={{ page_obj.next_page_number }}">Вперёд</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% endblock %}
+</div>
+</body>
+
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>

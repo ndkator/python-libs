@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница детального описания задачи [/tasks/НомерЗадачи] -->
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body>
+
+
+<p style="text-align: center;"><img src="{% static "images/snake.jpg" %}" alt="Stones along the river" ></p>
+{% for task in tas %}
+<h1>Задача: {{task.Class}}</h1>
+<h2>Описание: {{task.TaskText}}</h2>
+{% endfor %}
+
+<hr>
+<h4>Модули, решающие данную задачу:</h4>
+{% for MODULE in mymodule %}
+<h5 style="color: #752424;">— Модуль: <a href="/modules/{{MODULE.id}}">{{MODULE}}</a></h5>
+{% endfor %}
+
+</body>
+
+<p style="text-align: center;"><a href="/tasks/"><span style="color: #0000ff;">Назад</span></a></p>
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>

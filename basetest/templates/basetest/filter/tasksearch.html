@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница с результатами поиска по задачам -->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body>
+
+<div class = 'container'>
+    <div class = 'row'>
+        <div class = 'col-sm-12'>
+            <h1 style="text-align:center">Поиск в разделе "Задачи"</h1>
+            <h3>Найденные результаты: {{ founded_task.count }}</h3>
+            {% for tas in founded_task %}
+                <h4><a href = "/tasks/{{ tas.id }}">{{tas.Class}}</a></h4>
+                <p>{{tas.TaskText|truncatewords:30}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</body>
+<p style="text-align: center;"><a href="/tasks/"><span style="color: #0000ff;">Задачи</span></a></p>
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>

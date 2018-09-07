@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница, определяющая поведение форм авторизации и регистрации при различных состояниях пользователя -->
+
+<html>
+  <head>
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+
+  <body>
+  <p>&nbsp;</p>
+  <p style="text-align: center;"><img src="{% static "images/snake.jpg" %}"></p>
+    {% block body %}
+
+    <!---{% if messages %}
+    <div style="text-align: center">
+      <strong>Сообщение: </strong>
+      <ul>
+	{% for message in messages %}
+	<li>{{message}}</li>
+	{% endfor %}
+      </ul>
+    </div>
+    {% endif %}-->
+
+{% if user.is_authenticated %}
+<p style="text-align: center;"><a href="/"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+padding: 3px 10px; font-weight: bold; border-radius: 5px;">Главная страница</span></a>&nbsp;|
+  <a href="{% url 'account_logout' %}"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+  padding: 3px 10px; font-weight: bold; border-radius: 5px;">Выйти из аккаунта</span></a></p>
+  {% else %}
+  <p style="text-align: center;"><a href="/"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+  padding: 3px 10px; font-weight: bold; border-radius: 5px;">Главная страница</span></a> |&nbsp;
+    <a href="{% url 'account_signup' %}"><span style="background-color: #35ff2e; color: #ffffff; display: inline-block;
+  padding: 3px 10px; font-weight: bold; border-radius: 5px;">Регистрация</span></a> |&nbsp;
+    <a href="{% url 'account_login' %}"><span style="background-color: #0000ff; color: #ffffff; display: inline-block;
+  padding: 3px 10px; font-weight: bold; border-radius: 5px;">Авторизация</span></a></p>
+  {% endif %}
+
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+  </body>
+</html>

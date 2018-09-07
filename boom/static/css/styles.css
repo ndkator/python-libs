@@ -1,0 +1,80 @@
+body{ font-family: Calibri;
+background-repeat: no-repeat;
+/*background-position: center center;
+background-attachment: fixed;
+background-size: cover; */
+}
+h1{color:navy; font: 22pt/10pt "Calibri Light";}
+h2{color:green; font: 16pt/15pt "Calibri Light";}
+h3{color:green; font: 16pt/7pt "Calibri Light";}
+h4{color: #0d11ff; font: 12pt/10pt "Calibri Light";}
+h5{color: #ff000f; font: 12pt/12pt "Calibri Light";}
+h6{color: #ff5b56; font: 12pt/10pt "Calibri Light";}
+
+
+.classsearch {
+    width: 250px; /* Ширина в пикселах */
+}
+.classsearch2 {
+    width: 110px; /* Ширина в пикселах */
+}
+
+.transparent25 {
+    filter: alpha(Opacity=5);
+    opacity: 0.05;}
+
+button.exit {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(212,75,56); /* фон кнопки */
+  padding: .7em 1.5em; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+}
+button.exit:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+button.exit:active { background: rgb(152,15,0); } /* при нажатии */
+
+button.exitm {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(212,75,56); /* фон кнопки */
+  padding: 3px 1px; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+}
+button.exitm:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+button.exitm:active { background: rgb(152,15,0); } /* при нажатии */
+
+button.enter {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(0, 255, 72); /* фон кнопки */
+  padding: .7em 1.5em; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+}
+button.enter:hover { background: rgb(0, 140, 255); } /* при наведении курсора мышки */
+button.enter:active { background: rgb(0, 140, 255); } /* при нажатии */
+
+button.search {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(0, 140, 255); /* фон кнопки */
+  padding: 3px 1px; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+  width: 200px;
+}
+button.search:hover { background: rgb(0, 59, 255); } /* при наведении курсора мышки */
+button.search:active { background: rgb(0, 59, 255); } /* при нажатии */
+
+button.searchm {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(143, 0, 255); /* фон кнопки */
+  padding: 3px 1px; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+}
+button.searchm:hover { background: rgb(170, 0, 255); } /* при наведении курсора мышки */
+button.searchm:active { background: rgb(170, 0, 255); } /* при нажатии */

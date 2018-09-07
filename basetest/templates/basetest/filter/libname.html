@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница, открывающаяся при использовании фильтра "Отсортировать по имени" -->
+<!-- Работает точно так же, как и libraout.html -->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body style="background-image:url({% static "images/libraryback.png" %}">
+<p>&nbsp;</p>
+<p style="text-align: center;"><img src="{% static "images/snake.jpg" %}" alt="Stones along the river" ></p>
+
+<!-- Общий поиск -->
+<form class="testclass" style="text-align: center;" method="GET" action="{% url "search_path" %}">
+    <div class="form-group">
+        <input type="text" class="classsearch" placeholder="Введите ключевые слова" name="q">
+        <!-- Работа с SELECT -->
+        <div class="form-group">
+            Искать по:
+            <select name="par1">
+                <option value="All">Всем параметрам</option>
+                <option value="Names">Названиям</option>
+                <option value="Desc">Описаниям</option>
+                <option value="NamesAndDesc">Названиям и описаниям</option>
+                <option value="Creator">Создателям</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            Версия Python:
+            <select name="par2">
+                <option value="All">Все версии</option>
+                <option value="Py2">Python 2</option>
+                <option value="Py3">Python 3</option>
+            </select>
+        </div>
+
+        <!--<div class="form-group">
+            Дата выпуска (от):
+            <input type="number" class="classsearch2" placeholder="День" name="dayz">
+            <input type="number" class="classsearch2" placeholder="Месяц" name="monthz">
+            <input type="number" class="classsearch2" placeholder="Год" name="yearz">
+            Дата выпуска (до):
+            <input type="number" class="classsearch2" placeholder="День" name="dayx">
+            <input type="number" class="classsearch2" placeholder="Месяц" name="monthx">
+            <input type="number" class="classsearch2" placeholder="Год" name="yearx">
+        </div>-->
+
+        <div class="form-group">
+            <br><b>Критерий "Дата релиза"</b><br>
+            Старт диапазона:
+            <input type="date" class="classsearch2" placeholder="День" name="first">
+            Конец диапазона:
+            <input type="date" class="classsearch2" placeholder="Месяц" name="second">
+        </div>
+        <!-- Передача GET -->
+        <button class="search" type="submit">Поиск</button></div>
+</form>
+
+
+<p style="text-align: center;"><a href="/libs/filter/libreversename"><button class="exit">Отсортировать по имени</button></a> |
+    <a href="/libs/filter/py3"><button class="exit">Python 3</button></a> |
+    <a href="/libs/filter/py2"><button class="exit">Python 2</button></a></p>
+
+{% block content %}
+
+<table style="margin-left: auto; margin-right: auto;"><tr>
+{% for libra in object_list %}
+   <td><a href="/libs/{{libra.id}}"><h3 style="text-align: center;">{{libra.Name}}</h3></a></td>
+   {% if forloop.last %}
+     </tr>
+   {% else %}
+     {% if forloop.counter|divisibleby:"1" %}
+       </tr><tr>
+     {% endif %}
+   {% endif %}
+{% endfor %}
+</table>
+
+<div style="text-align: center;">
+{% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/libs/filter/name/?page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+                <span class="page-current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/libs/filter/name/?page={{ page_obj.next_page_number }}">Вперёд</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% endblock %}
+</div>
+</body>
+
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>

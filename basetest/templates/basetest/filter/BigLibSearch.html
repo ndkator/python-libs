@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!-- Страница с результатами поиска по библиотекам -->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}"/>
+    <title>Hello Django!</title>
+</head>
+
+<body>
+
+<div class = 'container'>
+    <div class = 'row'>
+        <div class = 'col-sm-12'>
+            <h1 style="text-align:center">Поиск в разделе "Библиотеки"</h1>
+            <h3>Найденные результаты: {{ founded_libs.count }}</h3>
+            {% for libs in founded_libs %}
+                <h4><a href = "/libs/{{ libs.id }}">{{libs.Name}}</a></h4>
+                <p>{{libs.Description|truncatewords:30}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+<p style="text-align: center;"><a href="/libs/"><span style="color: #0000ff;">Библиотеки</span></a></p>
+<p style="text-align: center;"><a href="/"><span style="color: #0000ff;">Вернуться на главную страницу</span></a></p>
+</html>
